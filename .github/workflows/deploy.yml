@@ -1,0 +1,25 @@
+name: Despliegue a Producción
+
+on:
+  push:
+    branches:
+      - main  # O 'master', verifica cómo se llama tu rama principal
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obtener el código más reciente
+        uses: actions/checkout@v4
+
+      - name: Copiar archivos al VPS
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          source: "."
+          target: "/var/www/lamaromapromos.com"
+          # Importante: Esto asegura que no se cree una carpeta extra
+          strip_components: 0

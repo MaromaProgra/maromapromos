@@ -1,0 +1,294 @@
+/* ========================================
+   MARO//A - RESPONSIVE
+   ======================================== */
+
+/* ==================== LARGE DESKTOP (1440px+) ==================== */
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1400px;
+    }
+    
+    .hero-title {
+        font-size: 5rem;
+    }
+}
+
+/* ==================== DESKTOP (1024px - 1439px) ==================== */
+@media (max-width: 1439px) {
+    .hero-title {
+        font-size: 4.5rem;
+    }
+}
+
+/* ==================== TABLET (768px - 1023px) ==================== */
+@media (max-width: 1023px) {
+    /* Navbar */
+    .navbar nav {
+        padding: 1rem 1.5rem;
+    }
+    
+    .navbar ul {
+        display: none;
+    }
+    
+    /* Hero */
+    .hero-title {
+        font-size: 3.5rem;
+    }
+    
+    /* Stats Grid */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .stats-grid .stat-card:last-child {
+        grid-column: span 2;
+    }
+    
+    /* Section Titles */
+    .section-title {
+        font-size: 2.5rem;
+    }
+    
+    /* Map Section */
+    .map-section .grid {
+        gap: 3rem;
+    }
+}
+
+/* ==================== MOBILE LARGE (640px - 767px) ==================== */
+@media (max-width: 767px) {
+    /* Typography */
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    /* Hero Section */
+    .hero-section {
+        height: 70vh;
+        min-height: 500px;
+    }
+    
+    /* Video Section */
+    .video-section {
+        padding: 4rem 0;
+    }
+    
+    .play-button {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .play-button svg {
+        width: 3rem;
+        height: 3rem;
+    }
+    
+    /* Service Grid */
+    .service-card {
+        margin-bottom: 1rem;
+    }
+    
+    /* Stats */
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .stats-grid .stat-card:last-child {
+        grid-column: span 1;
+    }
+    
+    .stat-card h3 {
+        font-size: 4rem;
+    }
+    
+    .stat-card p {
+        font-size: 1rem;
+    }
+    
+    /* Map Section */
+    .map-section h2 {
+        font-size: 2rem;
+    }
+    
+    .map-section h3 {
+        font-size: 1.25rem;
+    }
+    
+    /* Clients */
+    .clients-section .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    
+    /* Modal */
+    .modal > div {
+        max-width: 90%;
+        margin: 1rem;
+    }
+    
+    #agendarModal .bg-white {
+        padding: 1.5rem;
+    }
+    
+    #agendarModal h3 {
+        font-size: 1.75rem;
+    }
+    
+    /* Buttons */
+    .btn-primary {
+        padding: 0.5rem 1.25rem;
+        font-size: 0.875rem;
+    }
+}
+
+/* ==================== MOBILE SMALL (320px - 639px) ==================== */
+@media (max-width: 639px) {
+    /* Container */
+    .container {
+        padding: 0 1rem;
+    }
+    
+    /* Navbar */
+    .navbar nav {
+        padding: 0.75rem 1rem;
+    }
+    
+    .navbar img {
+        height: 2rem;
+    }
+    
+    /* Hero */
+    .hero-title {
+        font-size: 2rem;
+        line-height: 1.1;
+    }
+    
+    .hero-section {
+        height: 60vh;
+        min-height: 400px;
+    }
+    
+    /* Sections Padding */
+    section {
+        padding: 2rem 0 !important;
+    }
+    
+    /* Play Button */
+    .play-button {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .play-button svg {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+    
+    /* Service Cards */
+    .service-card h3 {
+        font-size: 1.125rem;
+    }
+    
+    /* Stats */
+    .stat-card h3 {
+        font-size: 3rem;
+        padding: 2rem 1rem;
+    }
+    
+    .stat-card p {
+        font-size: 0.875rem;
+        padding: 1.5rem 0.5rem;
+    }
+    
+    /* Map Section */
+    .map-section img {
+        max-width: 250px;
+    }
+    
+    .map-section h2 {
+        font-size: 1.5rem;
+    }
+    
+    .map-section svg {
+        width: 3rem;
+        height: 3rem;
+    }
+    
+    /* Clients Grid */
+    .client-logo {
+        height: 3rem;
+    }
+    
+    /* Footer */
+    footer img {
+        height: 3.5rem;
+    }
+    
+    footer p {
+        font-size: 1rem;
+    }
+    
+    /* Modal Close Button */
+    .modal-close {
+        font-size: 2rem;
+        top: -2.5rem;
+    }
+}
+
+/* ==================== LANDSCAPE MODE (Mobile) ==================== */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero-section {
+        height: auto;
+        min-height: 100vh;
+    }
+    
+    .video-section {
+        padding: 3rem 0;
+    }
+}
+
+/* ==================== PRINT STYLES ==================== */
+@media print {
+    .navbar,
+    .modal,
+    .btn-primary,
+    .play-button {
+        display: none !important;
+    }
+    
+    body {
+        background: white;
+    }
+    
+    * {
+        box-shadow: none !important;
+    }
+}
+
+/* ==================== HIGH CONTRAST MODE ==================== */
+@media (prefers-contrast: high) {
+    .btn-primary {
+        border: 2px solid currentColor;
+    }
+    
+    .service-card {
+        border: 2px solid var(--gray-dark);
+    }
+}
+
+/* ==================== DARK MODE (si se implementa) ==================== */
+@media (prefers-color-scheme: dark) {
+    /* Descomentar si deseas soporte para dark mode
+    :root {
+        --primary-black: #ffffff;
+        --white: #000000;
+        --gray-light: #1f2937;
+    }
+    */
+}
