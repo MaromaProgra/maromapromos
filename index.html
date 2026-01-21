@@ -1,60 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maro//a - Somos Inconformistas</title>
+    <title>Maromapromos - Somos Inconformistas</title>
     <link rel="icon" href="/assets/Logos Maroma/Isologo_Color.png" type="image/png">
-
+    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     
-    <link rel="stylesheet" href="/assets/css/main.css" >
+    <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/animations.css">
     <link rel="stylesheet" href="/assets/css/components.css">
     <link rel="stylesheet" href="/assets/css/responsive.css">
 </head>
 
 <body class="bg-white">
+    <!-- HEADER / NAVIGATION -->
     <header class="bg-black fixed w-full top-0 z-50">
-        <nav class="container mx-auto py-4 flex justify-between items-center">
+        <nav class="container mx-auto py-4 px-6 flex justify-between items-center">
             <div class="flex items-center">
-                <img src="./assets/Logos Maroma/Logo_Maroma_Blanco+Isologo_color.png" alt="Maro//a" class="h-10">
+                <img src="/assets/Logos Maroma/Logo_Maroma_Blanco+Isologo_color.png" alt="Maroma" class="h-10">
             </div>
 
             <ul class="hidden md:flex space-x-8 text-white text-sm">
                 <li><a href="#inicio" class="hover:text-red-500 transition">Inicio</a></li>
                 <li><a href="#servicios" class="hover:text-red-500 transition">Servicios</a></li>
                 <li><a href="#partners" class="hover:text-red-500 transition">Partners</a></li>
-                <li><a href="#casos-de-exito" class="hover:text-red-500 transition">Casos de exito</a></li>
+                <li><a href="#casos-de-exito" class="hover:text-red-500 transition">Casos de éxito</a></li>
             </ul>
 
-            <button onclick="openAgendarModal()" class="bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700 transition:text-sm font-semibold">
+            <button onclick="openAgendarModal()" class="bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700 transition text-sm font-semibold">
                 Agendar Meet
             </button>
         </nav>
     </header>
 
-    <section id="inicio" class="relative h-screen bg-black pt-20" >
-        <div class="absolute inset-0">
-            <img src="/assets/img/luchador-cerca-retrato-antes-de-la-pelea.jpg" alt="Boxeador" class="w-full h-full object-cover opacity-90">
-            <div class="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent"></div>
+    <!-- HERO SECTION - Imagen del luchador -->
+    <section id="inicio" class="relative bg-black pt-20" style="height: 80vh; min-height: 800px;">
+        <!-- Layout de dos columnas -->
+        <div class="absolute inset-0 flex">
+            <!-- Mitad izquierda - Imagen del luchador -->
+            <div class="w-1/2 h-full relative">
+                <img src="/assets/Logos Maroma/luchador-cerca-retrato-antes-de-la-pelea.jpg" alt="Luchador" class=" h-full object-cover object-center opacity-90">
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent to-black"></div>
+            </div>
+            <!-- Mitad derecha - Fondo negro -->
+            <div class="w-1/2 h-full bg-black"></div>
         </div>
 
-        <div class="relative container mx-auto px-6  h-full flex items-center">
-            <div class="max-w-2xl">
-                <h1 class="text-white text-7xl font-bold leading-tight">
+        <div class="relative container mx-auto px-6 h-full flex items-center">
+            <div class="w-1/2"></div>
+            <div class="w-1/2 flex items-center justify-center">
+                <h1 class="text-white text-4xl md:text-6xl lg:text-7xl font-bold leading-tight text-left">
                     SOMOS<br>
                     <span class="text-red-600 italic-text">Inconformistas</span>
                 </h1>
             </div>
         </div>
-        <div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-b from-transparent to-gray-700"></div>
+
     </section>
 
-    <section class="bg-gray-700 py-32 relative">
-        <div class="container mxauto px-6 text-center">
-            <div class="relative inline-block cursos-poniter" onclick="openViewModal()">
-                <div class="w-40 h-40 bg-white rounded-full flex items-center justify-center playbutton shadow-2xl">
-                    <svg class="w-16 h-16 text-gray-800 ml-2" fill="currentColor" viewBox="0 0 24 24">
+    <section class="bg-gray-700 py-60 relative overflow-hidden">
+        <div class="absolute inset-0">
+            <video autoplay muted loop playsinline class="w-full h-full object-cover">
+                <source src="/assets/videos/Intro Nueva Press Maroma.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="cursor-pointer inline-block" onclick="openVideoModal()">
+                <div class="w-32 h-32 md:w-40 md:h-40 bg-white rounded-full flex items-center justify-center playbutton shadow-2xl mx-auto">
+                    <svg class="w-12 h-12 md:w-16 md:h-16 text-gray-800 ml-2" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M8 5v14l11-7z" />
                     </svg>
                 </div>
@@ -62,137 +78,141 @@
         </div>
     </section>
 
-    <section id="servicios" class="bg-red-600 py-16">
-        <div class="container mx-auto px-6">
-            <h2 class="text-white text-5xl font-bold italic-text mb-12">SERVICIOS</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <section id="servicios" class="bg-red-600 py-16 relative torn-paper-top torn-red-top">
+        <div class="container mx-auto px-6 pt-8">
+            <h2 class="text-white text-4xl md:text-5xl font-bold italic-text mb-12">SERVICIOS</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
                 <div class="service-card bg-white rounded-lg overflow-hidden shadow-lg">
-                    <div class="h-32 bg-gray-200">
-                        <img src="./assets/images/#" alt="Promotoría" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-800">Promotoría</h3>
+                    <div class="h-24 md:h-32 bg-gray-200"></div>
+                    <div class="p-4 md:p-6">
+                        <h3 class="text-lg md:text-xl font-bold text-gray-800">Promotoría</h3>
                     </div>
                 </div>
                 <div class="service-card bg-white rounded-lg overflow-hidden shadow-lg">
-                    <div class="h-32 bg-gray-200">
-                        <img src="./assets/images/#" alt="Activaciones" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-800">Activaciones</h3>
+                    <div class="h-24 md:h-32 bg-gray-200"></div>
+                    <div class="p-4 md:p-6">
+                        <h3 class="text-lg md:text-xl font-bold text-gray-800">Activaciones</h3>
                     </div>
                 </div>
                 <div class="service-card bg-white rounded-lg overflow-hidden shadow-lg">
-                    <div class="h-32 bg-gray-200">
-                        <img src="./assets/images/#" alt="Degustación" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-800">Degustación</h3>
+                    <div class="h-24 md:h-32 bg-gray-200"></div>
+                    <div class="p-4 md:p-6">
+                        <h3 class="text-lg md:text-xl font-bold text-gray-800">Degustación</h3>
                     </div>
                 </div>
                 <div class="service-card bg-white rounded-lg overflow-hidden shadow-lg">
-                    <div class="h-32 bg-gray-200">
-                        <img src="./assets/images/#" alt="Capacitación" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-800">Capacitación</h3>
+                    <div class="h-24 md:h-32 bg-gray-200"></div>
+                    <div class="p-4 md:p-6">
+                        <h3 class="text-lg md:text-xl font-bold text-gray-800">Capacitación</h3>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="bg-gray-100 py-20">
-        <div class="container mx-auto px-6">
-            <h2 class="text-center text-5xl font-bold text-red-600 mb-16">
-                MAROMA EN<br>NÚMEROS
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="stat-card text-center">
-                    <div class="bg-red-600 rounded-t-lg py-16">
-                        <h3 class="text-8xl font-bold text-white">+12</h3>
-                    </div>
-                    <div class="bg-gray-900 rounded-b-lg py-8">
-                        <p class="text-white text-lg px-4">Clientes que han<br>confiado en nosotros</p>
+    <!-- SECCIÓN MAROMA EN NÚMEROS -->
+    <section class="py-20 relative">
+        <!-- Imagen de fondo -->
+        <div class="absolute inset-0">
+            <img src="/assets/Logos Maroma/AdobeStock_303132792.jpeg" alt="Fondo" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-white/30"></div>
+        </div>
+
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <h2 class="text-gray-900 text-4xl md:text-5xl font-bold mb-2">MAROMA EN</h2>
+            <h2 class="text-red-600 text-4xl md:text-5xl font-bold italic-text mb-16">NÚMEROS</h2>
+            
+            <div class="flex flex-row justify-center items-stretch gap-4 md:gap-8 max-w-5xl mx-auto">
+                <!-- Estadística 1 -->
+                <div class="stat-card text-center flex-1">
+                    <div class="bg-red-600 py-24 md:py-32"></div>
+                    <div class="bg-gray-900 py-6 md:py-8">
+                        <h3 class="text-4xl md:text-6xl font-bold text-white mb-2">+12</h3>
+                        <p class="text-white text-xs md:text-sm px-2">Clientes que han<br>confiado en nosotros</p>
                     </div>
                 </div>
-                <div class="stat-card text-center">
-                    <div class="bg-red-600 rounded-t-lg py-16">
-                        <h3 class="text-8xl font-bold text-white">70%</h3>
-                    </div>
-                    <div class="bg-gray-900 rounded-b-lg py-8">
-                        <p class="text-white text-lg px-4">Nos dedicamos<br>principalmente al BTL</p>
+                <!-- Estadística 2 -->
+                <div class="stat-card text-center flex-1">
+                    <div class="bg-red-600 py-24 md:py-32"></div>
+                    <div class="bg-gray-900 py-6 md:py-8">
+                        <h3 class="text-4xl md:text-6xl font-bold text-white mb-2">70%</h3>
+                        <p class="text-white text-xs md:text-sm px-2">Nos dedicamos<br>principalmente al BTL</p>
                     </div>
                 </div>
-                <div class="stat-card text-center">
-                    <div class="bg-red-600 rounded-t-lg py-16">
-                        <h3 class="text-8xl font-bold text-white">30%</h3>
-                    </div>
-                    <div class="bg-gray-900 rounded-b-lg py-8">
-                        <p class="text-white text-lg px-4">De nuestros proyectos<br>son ATL</p>
+                <!-- Estadística 3 -->
+                <div class="stat-card text-center flex-1">
+                    <div class="bg-red-600 py-24 md:py-32"></div>
+                    <div class="bg-gray-900 py-6 md:py-8">
+                        <h3 class="text-4xl md:text-6xl font-bold text-white mb-2">30%</h3>
+                        <p class="text-white text-xs md:text-sm px-2">De nuestros proyectos<br>son ATL</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="casos-de-exito" class="bg-gray-900 py-20">
+    <!-- SECCIÓN OFICINAS / MAPA -->
+    <section id="casos-de-exito" class="bg-gray-800 py-20 relative">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <!-- Mapa de México -->
                 <div class="flex justify-center">
-                    <img src="./assets/images/mapa-mexico.png" alt="Mapa México" class="max-w-md w-full">
+                    <img src="/assets/img/mapa-mexico.png" alt="Mapa México" class="max-w-xs md:max-w-md w-full opacity-80">
                 </div>
+                <!-- Información de oficinas -->
                 <div class="text-center md:text-left">
-                    <h3 class="text-white text-2xl font-semibold mb-4">OFICINAS EN</h3>
-                    <h2 class="text-red-600 text-5xl font-bold italic-text mb-8">
+                    <h3 class="text-white text-xl md:text-2xl font-semibold mb-4">OFICINAS EN</h3>
+                    <h2 class="text-red-600 text-3xl md:text-5xl font-bold italic-text leading-tight">
                         CDMX, GUADALAJARA,<br>MÉRIDA Y<br>MONTERREY
                     </h2>
-                    <div class="flex justify-center md:justify-start">
-                        <svg class="w-16 h-16 text-red-600" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V7.3l7-3.11v8.8z"/>
-                        </svg>
-                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-     <section id="partners" class="bg-gray-100 py-20">
-        <div class="container mx-auto px-6">
-            <h2 class="text-center text-5xl font-bold text-gray-900 mb-16">NUESTROS CLIENTES</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-12 items-center">
+    <!-- SECCIÓN NUESTROS CLIENTES -->
+    <section id="partners" class="relative py-20">
+        <!-- Imagen de fondo -->
+        <div class="absolute inset-0">
+            <img src="/assets/Logos Maroma/AdobeStock_303132792.jpeg" alt="Fondo" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-white/30"></div>
+        </div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <h2 class="text-center text-4xl md:text-5xl font-bold text-gray-900 mb-16">NUESTROS CLIENTES</h2>
+            <div class="grid grid-cols-3 md:grid-cols-5 gap-8 md:gap-12 items-center max-w-5xl mx-auto">
                 <div class="flex justify-center">
-                    <img src="/assets/img/clientes/Logo Energizer Negro.png" alt="Energizer" class="client-logo h-16 object-contain">
+                    <img src="/assets/img/clientes/Logo Energizer Negro.png" alt="Energizer" class="client-logo h-10 md:h-12 object-contain">
                 </div>
                 <div class="flex justify-center">
-                    <img src="/assets/img/clientes/Logo Cinsa.png" alt="Cinsa" class="client-logo h-16 object-contain">
+                    <img src="/assets/img/clientes/Logo Cinsa.png" alt="Cinsa" class="client-logo h-10 md:h-12 object-contain">
                 </div>
                 <div class="flex justify-center">
-                    <img src="/assets/img/clientes/Logo Toyota.png" alt="Toyota" class="client-logo h-16 object-contain">
+                    <img src="/assets/img/clientes/Logo Toyota.png" alt="Toyota" class="client-logo h-10 md:h-12 object-contain">
                 </div>
                 <div class="flex justify-center">
-                    <img src="/assets/img/clientes/Logo Santa Anita.png" alt="Santa María" class="client-logo h-16 object-contain">
+                    <img src="/assets/img/clientes/Logo Santa Anita.png" alt="Santa Anita" class="client-logo h-10 md:h-12 object-contain">
                 </div>
                 <div class="flex justify-center">
-                    <img src="/assets/img/clientes/Logo Libanius.png" alt="Libanius" class="client-logo h-16 object-contain">
+                    <img src="/assets/img/clientes/Logo Libanius.png" alt="Libanius" class="client-logo h-10 md:h-12 object-contain">
                 </div>
                 <div class="flex justify-center">
-                    <img src="/assets/img/clientes/Logo Haagen Dazs.png" alt="Häagen-Dazs" class="client-logo h-16 object-contain">
+                    <img src="/assets/img/clientes/Logo Haagen Dazs.png" alt="Häagen-Dazs" class="client-logo h-10 md:h-12 object-contain">
                 </div>
                 <div class="flex justify-center">
-                    <img src="/assets/img/clientes/Logo Helados Nestlé.png" alt="Kessler" class="client-logo h-16 object-contain">
+                    <img src="/assets/img/clientes/Logo Helados Nestlé.png" alt="Nestlé" class="client-logo h-10 md:h-12 object-contain">
                 </div>
                 <div class="flex justify-center">
-                    <img src="/assets/img/clientes/Logo Grupo Herdez.png" alt="HEZ" class="client-logo h-16 object-contain">
+                    <img src="/assets/img/clientes/Logo Grupo Herdez.png" alt="Herdez" class="client-logo h-10 md:h-12 object-contain">
                 </div>
                 <div class="flex justify-center">
-                    <img src="/assets/img/clientes/Logo Calorex.png" alt="Calorex" class="client-logo h-16 object-contain">
+                    <img src="/assets/img/clientes/Logo Calorex.png" alt="Calorex" class="client-logo h-10 md:h-12 object-contain">
                 </div>
                 <div class="flex justify-center">
-                    <img src="/assets/img/clientes/Logo Daltile.png" alt="Daltile" class="client-logo h-16 object-contain">
+                    <img src="/assets/img/clientes/Logo Daltile.png" alt="Daltile" class="client-logo h-10 md:h-12 object-contain">
                 </div>
-                <div class="flex justify-center">
-                    <img src="/assets/img/clientes/Logo Vitromex.png" alt="Vitromex" class="client-logo h-16 object-contain">
+                <div class="flex justify-center col-span-3 md:col-span-5">
+                    <img src="/assets/img/clientes/Logo Vitromex.png" alt="Vitromex" class="client-logo h-10 md:h-12 object-contain">
                 </div>
             </div>
         </div>
@@ -201,18 +221,51 @@
     <!-- FOOTER -->
     <footer class="bg-black py-12">
         <div class="container mx-auto px-6 text-center">
-            <img src="/assets/Logos Maroma/Logo_Maroma_Color.png" alt="Maro//a" class="h-20 mx-auto mb-4">
+            <img src="/assets/Logos Maroma/Logo_Maroma_Color.png" alt="Maroma" class="h-16 md:h-20 mx-auto mb-4">
+            <p class="text-red-600 text-sm italic-text">Inconformistas</p>
         </div>
     </footer>
 
+    <!-- MODAL VIDEO -->
+    <div id="videoModal" class="modal fixed inset-0 bg-black/90 z-50 hidden flex items-center justify-center">
+        <div class="relative w-full max-w-4xl mx-4">
+            <button onclick="closeVideoModal()" class="absolute -top-12 right-0 text-white text-4xl hover:text-red-500 transition">&times;</button>
+            <video id="videoPlayer" class="w-full rounded-lg" controls>
+                <source src="/assets/videos/Intro Nueva Press Maroma.mp4" type="video/mp4">
+                Tu navegador no soporta videos HTML5.
+            </video>
+        </div>
+    </div>
 
+    <!-- MODAL AGENDAR -->
+    <div id="agendarModal" class="modal fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 relative">
+            <button onclick="closeAgendarModal()" class="absolute top-4 right-4 text-gray-500 text-2xl hover:text-red-500 transition">&times;</button>
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">Agenda una reunión</h3>
+            <form>
+                <div class="mb-4">
+                    <input type="text" name="nombre" placeholder="Nombre completo" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-red-500 focus:ring-2 focus:ring-red-200 transition" required>
+                </div>
+                <div class="mb-4">
+                    <input type="email" name="email" placeholder="Correo electrónico" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-red-500 focus:ring-2 focus:ring-red-200 transition" required>
+                </div>
+                <div class="mb-4">
+                    <input type="tel" name="telefono" placeholder="Teléfono" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-red-500 focus:ring-2 focus:ring-red-200 transition">
+                </div>
+                <div class="mb-6">
+                    <textarea name="mensaje" placeholder="¿En qué podemos ayudarte?" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-red-500 focus:ring-2 focus:ring-red-200 transition resize-none"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-red-600 text-white py-3 rounded-full font-semibold hover:bg-red-700 transition">
+                    Enviar mensaje
+                </button>
+            </form>
+        </div>
+    </div>
 
-    
-    <script src="./assets/js/main.js"></script>
-    <script src="./assets/js/navigation.js"></script>
-    <script src="./assets/js/modals.js"></script>
-    <script src="./assets/js/video.js"></script>
-    <script src="./assets/js/forms.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/navigation.js"></script>
+    <script src="/assets/js/modals.js"></script>
+    <script src="/assets/js/video.js"></script>
+    <script src="/assets/js/forms.js"></script>
 </body>
 </html>
