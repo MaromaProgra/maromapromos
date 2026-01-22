@@ -1,0 +1,550 @@
+/* AUTHENTICATION STYLES (Login / Registro) */
+
+/* Inherit font from variables/main if needed, or define here */
+/* Base Layer: HTML gets the Orange color so it's behind everything */
+html {
+    background-color: #FE6E07;
+    height: 100%;
+}
+
+body.auth-page {
+    /* Transparent body to let HTML orange show through */
+    background: transparent;
+
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* Fixed height for 100% screen */
+    margin: 0;
+    font-family: var(--font-primary);
+    padding-top: 120px;
+
+    position: relative;
+    overflow: hidden;
+    /* Prevent scrolling */
+    z-index: 1;
+    /* Content stack level */
+    box-sizing: border-box;
+    /* Include padding in height */
+}
+
+/* Layer 1: Watermark (Above Orange, Below Gray) */
+body.auth-page::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* "Mas centrada" -> Center Center */
+    background: url('../assets/images/Logo colores blanco hd.png') no-repeat center center;
+    background-size: 80% auto;
+    opacity: 0.1;
+    /* Transparency */
+    z-index: -1;
+    /* Behind content and after (if after is 0?) */
+    pointer-events: none;
+}
+
+/* Layer 2: Gray Gradient (Top of Watermark, covers bottom half) */
+body.auth-page::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Transparent top, Gray bottom */
+    background: linear-gradient(176deg, transparent 0%, transparent 50%, #222 50.1%, #222 100%);
+    z-index: -1;
+    /* Same level as before? Source order puts after on top of before */
+    pointer-events: none;
+}
+
+/* --- HEADER / NAV STYLES (Copied from style.css for independence) --- */
+.nav-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 9999;
+    box-sizing: border-box;
+    background: transparent;
+    /* Changed to transparent as per design mockup usually implies, or keep black? mockup shows orange top. */
+    /* If the mockup shows the header area is orange, we should remove the black background from header */
+}
+
+/* ... existing nav styles ... */
+/* NOTE: I am keeping the nav styles below effectively unchanged but ensuring comments match context */
+
+.header-logo-container {
+    width: 40%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.header-logo {
+    width: 150px;
+    max-width: 100%;
+    height: auto;
+}
+
+.header-menu-container {
+    width: 60%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.nav-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+/* Desktop Nav Links */
+.nav-header nav {
+    display: flex;
+    gap: 30px;
+    margin-right: 30px;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.nav-header nav a {
+    color: white;
+    /* Might need to be black if on orange? Reference image shows header on orange? 
+                     User said "fondo naranja tiene el logo... encima color gris".
+                     I will assume white text is safe for now, can adjust. */
+    font-size: 0.75rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-decoration: none;
+    line-height: 1.2;
+    font-family: var(--font-display);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    /* Added shadow for readability on orange */
+}
+
+/* Mobile Hamburger (Hidden on Desktop) */
+.hamburger-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1100;
+}
+
+.hamburger-btn span {
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+/* Mobile Responsive */
+@media (max-width: 1024px) {
+    .hamburger-btn {
+        display: flex;
+    }
+
+    .nav-wrapper {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #111;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 0;
+        gap: 20px;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, opacity 0.4s ease;
+        border-bottom: 2px solid var(--color-accent);
+    }
+
+    .nav-wrapper.active {
+        max-height: 500px;
+        opacity: 1;
+    }
+
+    .nav-header nav {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .nav-header nav a {
+        font-size: 1.2rem;
+    }
+}
+
+/* ------------------------------------------------------------- */
+
+/* LOGIN CONTAINER - Rhomboid Style */
+.login-container {
+    background-color: #f5f5f5;
+    /* Light gray/white background */
+    padding: 50px 60px;
+    border-radius: 0;
+    /* No radius */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: left;
+    /* Aligned left as per image "DATOS DE USUARIO" */
+    width: 90%;
+    max-width: 800px;
+    /* Wider container */
+    border: none;
+    color: #333;
+
+    /* Rhomboid Effect */
+    transform: skewX(-10deg);
+    margin-bottom: 50px;
+}
+
+/* Counter-skew content so it remains straight */
+.login-container>* {
+    transform: skewX(10deg);
+}
+
+.login-title {
+    font-family: var(--font-display);
+    color: #333;
+    /* Dark text for title as per image */
+    text-transform: uppercase;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-align: left;
+    font-weight: 900;
+}
+
+/* Subtitle/Text below title */
+.login-container p {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+    max-width: 300px;
+}
+
+/* Layout for Form: The image shows inputs on the right side? 
+   No, current HTML structure is vertical 
+   <div class="login-container">
+      <h1...>
+      <p...> (Added logic for text if needed, or just <form>)
+      <form>...
+   
+   If we want the layout to look exactly like the image (Title Left, Inputs Right),
+   we need to adjust the HTML or use Grid here.
+   However, without changing HTML, I can use Flexbox on the container IF the HTML supports it.
+   The current HTML is:
+        <h1 class="login-title">INICIAR SESIÓN</h1>
+        <form ...>
+   
+   I will make the container a flex container to put Title on left and Form on right?
+   The user request says: "el div de login donde se escribe usuario y contraseña es rectangular horizontal".
+   It doesn't explicitly ask for a 2-column layout but the image likely implies it.
+   Let's try to achieve a clean look with the existing HTML first, or use CSS Grid on the container to position H1 and Form side-by-side if there's space.
+*/
+
+@media (min-width: 768px) {
+    .login-container {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        gap: 40px;
+        align-items: center;
+    }
+
+    .login-title {
+        grid-column: 1;
+        text-align: left;
+    }
+
+    /* Assuming there's a description text, but looking at HTML `login.php`:
+       <h1 class="login-title">INICIAR SESIÓN</h1>
+       <form ...>
+       
+       I'll push the H1 to the left and Form to the right using Grid.
+       If there is extra text "Coloca los mismos datos...", it should be in the HTML.
+       Currently it's not in the reviewed HTML (Step 15), so I can only style what isn't there.
+       Wait, I should verify if I need to add that text. The user request implied visual changes.
+       I will stick to styling what is there.
+    */
+
+    .login-container form {
+        grid-column: 2;
+        grid-row: 1 / span 3;
+        /* Span rows if needed */
+    }
+}
+
+.form-group {
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #000;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: var(--font-display);
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px 0;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid #FE6E07;
+    /* Orange line */
+    color: #333;
+    border-radius: 0;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-input::placeholder {
+    color: #ccc;
+}
+
+.form-input:focus {
+    outline: none;
+    background: rgba(254, 110, 7, 0.05);
+}
+
+.login-submit {
+    background-color: #222;
+    /* Black/Dark button as per common design patterns for this look */
+    color: white;
+    border: none;
+    padding: 15px;
+    width: 100%;
+    font-family: 'HelveticaNeue-CondensedBlack', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 0;
+    /* No radius */
+    margin-top: 10px;
+    transition: background 0.3s;
+}
+
+.login-submit:hover {
+    background-color: #000;
+}
+
+.back-link {
+    display: block;
+    /* If using grid, this needs placement */
+    margin-top: 20px;
+    color: #888;
+    text-decoration: none;
+    font-size: 0.9rem;
+    text-align: right;
+    /* or center */
+    grid-column: 2;
+    /* Place under form in grid */
+}
+
+.back-link {
+    display: block;
+    margin-top: 20px;
+    color: #888;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.back-link:hover {
+    color: #555;
+    /* Add a hover color if needed, or just close the block */
+    text-decoration: underline;
+}
+
+/* --- MODAL STYLES (Copied from style.css) --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100000;
+    left: 0;
+
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 40px;
+    border: 1px solid #888;
+    width: 100%;
+    max-width: 800px;
+    height: 65vh;
+    border-radius: 0;
+    /* No radius */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    /* Rhomboid Effect */
+    transform: skewX(-10deg);
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Counter-skew content */
+.modal-content>* {
+    transform: skewX(10deg);
+}
+
+.modal-body {
+    overflow-y: auto;
+    flex-grow: 1;
+    padding-right: 10px;
+}
+
+/* Scrollbar Styling for Modal */
+.modal-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 0;
+    /* No radius */
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background: #FE6E07;
+    border-radius: 0;
+    /* No radius */
+}
+
+.close-modal {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 35px;
+    /* Adjusted spacing due to skew */
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+    /* transform: skewX(10deg); Already handled by > * rule, but verify specificity if needed. */
+}
+
+.close-modal:hover,
+.close-modal:focus {
+    color: #FE6E07;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Content Typography */
+.terms-content h2 {
+    font-family: var(--font-display);
+    color: #FE6E07;
+    text-transform: uppercase;
+    margin-top: 0;
+}
+
+.terms-content h3 {
+    font-family: var(--font-display);
+    color: #333;
+    margin-top: 20px;
+}
+
+.terms-content p {
+    font-family: var(--font-primary);
+    color: #555;
+    line-height: 1.6;
+}
+
+/* --- FAQ ACCORDION --- */
+.faq-main-title {
+    font-family: var(--font-display);
+    color: #FE6E07;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+}
+
+.faq-item {
+    border-bottom: 2px solid black;
+    margin-bottom: 15px;
+}
+
+.faq-question {
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: black;
+    transition: color 0.3s;
+}
+
+.faq-question:hover {
+    color: #FE6E07;
+}
+
+.faq-icon {
+    font-size: 1.8rem;
+    color: #FE6E07;
+    font-weight: bold;
+    transition: transform 0.3s;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+}
+
+.faq-answer p {
+    font-family: var(--font-primary);
+    color: #444;
+    line-height: 1.5;
+    margin: 10px 0 20px 0;
+}
+
+/* Active State for FAQ */
+.faq-item.active .faq-answer {
+    max-height: 200px;
+}
+
+.faq-item.active .faq-icon {
+    transform: rotate(45deg);
+}
+
+/* End of file */

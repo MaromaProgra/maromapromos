@@ -1,0 +1,45 @@
+:root {
+    /* Colors */
+    --color-bg: #111111;
+    /* Deep black/dark grey */
+    --color-bg-secondary: #232323;
+    /* Requested dark grey for cards/containers */
+    --color-surface: #1a1a1a;
+    --color-text-main: #ffffff;
+    --color-text-muted: #cdcdcd;
+
+    /* Branding */
+    --color-accent: #FE6E07;
+    /* ArmorAll Orange - MAIN */
+    --color-accent-hover: #e55e00;
+    /* Slightly darker for hover */
+    --color-dark-accent: #cc7a00;
+
+    /* Typography */
+    /* Typography */
+    --font-primary: 'Outfit', sans-serif;
+    /* Standard Body Text */
+    --font-display: 'HelveticaNeue-CondensedBlack', 'Helvetica Neue', Arial, sans-serif;
+    /* Headlines (TITLES) */
+    --font-brand: 'EthnocentricRg-Bold', sans-serif;
+    /* Logo Stylized Text */
+    --font-brand-italic: 'EthnocentricRg-Italic', sans-serif;
+
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 8rem;
+
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-medium: 0.5s ease;
+    --transition-slow: 0.8s ease;
+
+    /* Z-Index */
+    --z-back: -1;
+    --z-normal: 1;
+    --z-menu: 10;
+    --z-tooltip: 100;
+}

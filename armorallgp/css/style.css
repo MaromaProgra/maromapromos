@@ -1,0 +1,1425 @@
+/* Global Refinements */
+@font-face {
+    font-family: 'EthnocentricRg-Bold';
+    src: url('../assets/fonts/ethnocentric rg.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'EthnocentricRg-Italic';
+    src: url('../assets/fonts/ethnocentric rg it.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+body,
+main {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: var(--color-bg);
+}
+
+/* SECTION 1: Video Hero */
+.video-hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    color: white;
+}
+
+.bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: -1;
+}
+
+/* Container for main content - Allows absolute positioning of children */
+.video-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    pointer-events: none;
+    /* Let clicks pass through, re-enable on children */
+}
+
+/* Wrapper for Text Elements (GP + Promo) - Left 60% */
+.video-text-group {
+    position: absolute;
+    top: 40%;
+    left: -5%;
+    transform: translateY(-40%);
+    /* Center vertically */
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Left align text */
+    text-align: left;
+    pointer-events: auto;
+}
+
+/* GP Branding */
+.gp-branding {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    /* Left align */
+    font-family: 'EthnocentricRg-Bold', sans-serif;
+    margin-bottom: 2vw;
+    width: 100%;
+}
+
+.gp-text {
+    font-size: 15vw;
+    color: #FE6E07;
+    line-height: 1;
+    margin-right: -2vw;
+    z-index: 1;
+}
+
+.armor-text {
+    font-size: 4vw;
+    color: #FE6E07;
+    /* Changed to Orange as requested */
+    border: none;
+    -webkit-text-stroke: 0;
+}
+
+/* Promo Text Left Alignment */
+.promo-info {
+    margin-bottom: 0px;
+    text-align: left;
+    margin-left: 14%;
+}
+
+/* Button - Bottom Right */
+/* Button - Bottom Right - FIXED ON SCREEN */
+.cta-btn-parallelogram.hero-btn {
+    position: fixed;
+    /* Fixed relative to viewport */
+    bottom: 40px;
+    right: 40px;
+    pointer-events: auto;
+    margin-left: 0;
+    z-index: 9999;
+    /* On top of everything */
+}
+
+.section-logo-bottom {
+    position: absolute;
+    bottom: 30px;
+    left: 40px;
+    width: 12vw;
+    min-width: 150px;
+    z-index: 10;
+}
+
+
+/* SECTION 2: Curtain Reveal Animation */
+
+/* 1. Underlying Sticky Layer (Video Hero) was set above. 
+   We ensure Section 2 sits on top and allows transparency. */
+
+/* PINNED CONTAINER: Holds the scroll-based animation layers */
+#pinned-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 1;
+    /* Below Nav, Above Body */
+    overflow: hidden;
+}
+
+/* 1. Underlying Sticky Layer (Video Hero) */
+/* Note: This must be applied to the Video Hero section in the DOM */
+.video-hero {
+    position: absolute;
+    /* Changed to absolute inside fixed container */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    color: white;
+    z-index: 0;
+    /* Behind Section 2 */
+}
+
+/* 2. The Overlying Layer (Section 1b) */
+.hero-section {
+    position: absolute;
+    /* Absolute to overlay exactly on top */
+    top: -5vh;
+    left: 0;
+    height: 120vh;
+    /* Same size as Section 1A */
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    z-index: 10;
+    pointer-events: none;
+    background: transparent;
+}
+
+/* 3. The Columns (Curtains) */
+.hero-column {
+    flex: 1;
+    height: 100%;
+    /* Fill the container */
+    display: flex;
+    flex-direction: column;
+    will-change: transform;
+    pointer-events: auto;
+    /* transition: transform 0.1s linear; REMOVED to avoid conflict with JS scroll */
+}
+
+/* Left Curtain (Wheel) */
+.left-column {
+    position: relative;
+    width: 50%;
+    /* Background moved to ::before */
+    transform: translateX(-100%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Background Shape for Left Column */
+.left-column::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150%;
+    /* Extend to cover center without clipping */
+    height: 150%;
+    background: linear-gradient(90deg, #FE6E07, #F6C100);
+    /* 30% of 200% width = 60% screen width. Need 30% screen width = 15% of 200%(?)
+       Wait, let's stick to local logic:
+       Width is 100vw (200% of 50vw).
+       Target Top: 30vw = 30%. Target Bottom: 60vw = 60%. */
+    clip-path: polygon(0 0, 20% 0, 100% 100%, 0 100%);
+    z-index: -1;
+}
+
+/* Right Curtain (Steps) */
+.right-column {
+    flex: 1;
+    width: 50%;
+    /* Background moved to ::before */
+    color: white;
+    justify-content: center;
+    padding-right: 5%;
+    padding-left: 5%;
+    transform: translateX(100%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Background Shape for Right Column */
+.right-column::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    /* Pull back to start at screen left */
+    width: 200%;
+    /* Full screen width relative to 50% parent */
+    height: 100%;
+    /* Target Top: Start 30vw (30%). Target Bottom: Start 60vw (60%). */
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 55% 100%);
+    z-index: -1;
+}
+
+/* 4. Content Styling */
+.visual-group-wrapper {
+    position: relative;
+    width: 80%;
+    max-width: 650px;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.hero-wheel {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.hero-prizes {
+    position: absolute;
+    width: 120%;
+    max-width: none;
+    bottom: -10%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+/* Steps Grid */
+.steps-grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4vw;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: -15%;
+    padding: 10PX;
+    border-radius: 15PX;
+    color: white;
+    align-content: center;
+
+}
+
+.step-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+}
+
+.step-item:nth-child(-n+2) {
+    transform: translateX(-80px);
+    /* Ajusta este número a tu gusto */
+}
+
+.step-icon {
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: #ffffff;
+}
+
+.step-title {
+    font-family: 'HelveticaNeue-CondensedBlack', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #FE6E07;
+    font-weight: 900;
+    font-stretch: condensed;
+    text-transform: uppercase;
+    font-size: clamp(1.2rem, 2.5vw, 2.5rem);
+    margin: 0;
+    line-height: 1;
+}
+
+.step-desc {
+    font-family: 'ProximaNova-Regular', 'Arial', sans-serif;
+    color: white;
+    font-size: clamp(0.8rem, 1.5vw, 1rem);
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* Header/Nav - Fixed Positioning constraints */
+.nav-header {
+    position: fixed;
+    /* Changed to absolute since it's inside fixed pinned-container */
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 9999;
+    /* Highest priority */
+    box-sizing: border-box;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+    pointer-events: auto;
+    /* Ensure clicks work */
+}
+
+.header-logo-container {
+    width: 40%;
+    display: flex;
+    justify-content: flex-start;
+    /* Align logo left */
+    align-items: center;
+}
+
+.header-logo {
+    width: 150px;
+    /* Adjust logo size */
+    max-width: 100%;
+    height: auto;
+}
+
+.header-menu-container {
+    width: 60%;
+    display: flex;
+    justify-content: flex-end;
+    /* Align menu right */
+    align-items: center;
+}
+
+/* Nav Wrapper for Desktop (Default) */
+.nav-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+/* Hamburger Button (Hidden on Desktop) */
+.hamburger-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1100;
+}
+
+.hamburger-btn span {
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+/* Hamburger Animation classes */
+.hamburger-btn.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.hamburger-btn.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-btn.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+
+/* Media Query for Mobile/Tablet Menu */
+@media (max-width: 1024px) {
+    .hamburger-btn {
+        display: flex;
+        /* Show button */
+    }
+
+    .nav-header {
+        background: #111;
+        /* Solid bg on mobile for readability */
+        padding: 15px 20px;
+    }
+
+    .nav-wrapper {
+        position: absolute;
+        top: 100%;
+        /* Drop down from header */
+        left: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.95);
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 0;
+        gap: 20px;
+
+        /* Hidden by default */
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, opacity 0.4s ease;
+        border-bottom: 2px solid var(--color-accent);
+    }
+
+    /* CAROUSEL SECTION */
+    .carousel-section {
+        position: relative;
+        z-index: 20;
+        /* Sits on top of the pinned layers */
+        background-color: #f0f0f0;
+        /* Light grey background */
+        padding: 100px 0;
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .carousel-track {
+        display: flex;
+        gap: 4vw;
+        /* Space between cards */
+        width: max-content;
+        /* Allow full width of children */
+        animation: scroll 30s linear infinite;
+        padding-left: 2vw;
+        /* Initial offset */
+    }
+
+    .carousel-track:hover {
+        animation-play-state: paused;
+        /* User can pause by hovering */
+    }
+
+    /* Product Card - Parallelogram Shape */
+    .product-card {
+        position: relative;
+        width: 28vw;
+        max-width: 450px;
+        min-width: 300px;
+        background: white;
+        transform: skewX(-10deg);
+        /* Slant */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        /* Slight softening */
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .product-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        transform: skewX(10deg);
+        /* Counter-slant for content */
+        /* Wait! If we counter-slant the content container, everything inside is straight.
+       BUT the black footer in the image IS slanted.
+       So we should NOT counter-slant the whole content wrapper if we want the black bar to match the card skew.
+       
+       Strategy: 
+       - Card is skewed. 
+       - Image is inside -> Counter-skew Image ONLY.
+       - Black Footer is inside -> Do NOT counter-skew footer container (so it stays slanted).
+       - Text inside footer -> Counter-skew Text.
+    */
+        transform: none;
+        /* RESET: Handle children individually */
+    }
+
+    .product-img {
+        width: 110%;
+        /* Compenstate for skew cropping */
+        height: auto;
+        object-fit: contain;
+        margin-left: -5%;
+        /* Center after width increase */
+        padding: 20px;
+        transform: skewX(10deg);
+        /* Counter-skew image */
+        max-height: 400px;
+        align-self: center;
+    }
+
+    /* Black Info Footer */
+    .product-info-box {
+        background: #111;
+        padding: 20px 40px;
+        margin-top: auto;
+        /* Push to bottom */
+        width: 110%;
+        /* Ensure coverage */
+        margin-left: -5%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-top: 4px solid #FE6E07;
+        /* Optional accent based on brand */
+    }
+
+    .p-title,
+    .p-subtitle {
+        transform: skewX(10deg);
+        /* Counter-skew text to make it readable */
+        margin: 0;
+        text-align: center;
+        text-transform: uppercase;
+        line-height: 1;
+    }
+
+    .p-title {
+        font-family: 'HelveticaNeue-CondensedBlack', 'Helvetica Neue', Arial, sans-serif;
+        color: white;
+        font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+        font-weight: 700;
+    }
+
+    .p-subtitle {
+        font-family: 'HelveticaNeue-CondensedBlack', 'Helvetica Neue', Arial, sans-serif;
+        color: #FE6E07;
+        font-size: clamp(1.4rem, 2vw, 2rem);
+        font-weight: 900;
+    }
+
+
+    /* Infinite Scroll Animation */
+    /* We have 3 Sets of 3 Cards. 
+   To loop seamlessly, we scroll from 0 to -33.333% (the width of 1 set).
+   When it hits -33.333%, it snaps back to 0, which looks identical.
+   BUT, we used 'gap'. Calculations must include gap.
+   Simple math: Just scroll 1/3 of total width.
+*/
+    @keyframes scroll {
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(-33.3333%);
+        }
+    }
+
+    /* Mobile Adjustments */
+    @media (max-width: 768px) {
+        .product-card {
+            width: 70vw;
+            /* Wider cards on mobile */
+        }
+
+        .carousel-track {
+            gap: 20px;
+        }
+    }
+
+    .nav-header nav {
+        flex-direction: column;
+        margin-right: 0;
+        gap: 20px;
+        text-align: center;
+        width: 100%;
+    }
+
+    .nav-header nav a {
+        font-size: 1.2rem;
+        /* Larger touch targets */
+        text-align: center;
+    }
+
+    .login-btn-wrapper {
+        margin-top: 10px;
+    }
+}
+
+/* GP Branding Refinement */
+.gp-branding {
+    display: flex;
+    flex-direction: row;
+    /* Horizontal alignment */
+    align-items: center;
+    justify-content: center;
+    font-family: 'EthnocentricRg-Bold', sans-serif;
+    margin-bottom: 2vw;
+    position: relative;
+}
+
+.gp-text {
+    font-size: 15vw;
+    /* Large but balanced */
+    color: #FE6E07;
+    line-height: 1;
+    margin-right: -2vw;
+    /* Tighten spacing */
+    z-index: 1;
+}
+
+.armor-text {
+    font-size: 3vw;
+    color: #FF6C08;
+    margin-left: -8vw;
+    margin-top: 8.3vw;
+
+}
+
+.nav-header nav {
+    display: flex;
+    gap: 30px;
+    margin-right: 30px;
+    flex-wrap: nowrap;
+    /* Prevent wrapping */
+    align-items: center;
+    justify-content: flex-end;
+}
+
+/* 3. Login Button Container */
+.login-btn-wrapper {
+    /* Inherits alignment from parent */
+    display: flex;
+    align-items: center;
+}
+
+.nav-header nav a {
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 900;
+    /* Increased weight for CondensedBlack feel */
+    text-transform: uppercase;
+    text-align: left;
+    line-height: 1.2;
+    font-family: 'HelveticaNeue-CondensedBlack', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-stretch: condensed;
+}
+
+.btn-outline {
+    border: 2px solid white;
+    padding: 8px 20px;
+    color: white;
+    font-weight: 900;
+    /* Increased weight */
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    display: inline-block;
+    white-space: nowrap;
+    font-family: 'HelveticaNeue-CondensedBlack', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-stretch: condensed;
+}
+
+/* Layout Columns */
+.hero-container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    /* Ensure it fits */
+    height: 100%;
+    padding-top: 2%;
+    /* Space for nav */
+    box-sizing: border-box;
+}
+
+.hero-column {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    will-change: transform, opacity;
+}
+
+/* Left Column */
+.left-column {
+    position: relative;
+    width: 45%;
+    flex: none;
+}
+
+.brand-logo {
+    position: absolute;
+    /* Revert to absolute */
+    top: -1px;
+    left: 40px;
+    width: 11vw;
+    /* Fluid width (approx 200px on FHD) */
+    /* Original size */
+    max-width: 80%;
+    height: auto;
+    z-index: 2;
+    margin: 0;
+    /* Reset margins */
+}
+
+.main-visual {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* New Wrapper to synchronize scaling */
+.visual-group-wrapper {
+    position: relative;
+    width: 80%;
+    /* Responsive width */
+    max-width: 650px;
+    /* Max size for the entire composition */
+    aspect-ratio: 1 / 1;
+    /* Maintain square aspect ratio for the wheel area */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-wheel {
+    position: absolute;
+    width: 100%;
+    /* Scale wheel slightly inside wrapper */
+    height: auto;
+    top: 40%;
+    /* Move slightly up to make room for prizes at bottom */
+    left: 53%;
+    transform: translate(-50%, -50%);
+    /* Center strictly in wrapper */
+    max-width: none;
+    /* Wrapper handles constraints */
+    z-index: 1;
+}
+
+.hero-prizes {
+    position: absolute;
+    width: 120%;
+    /* Make prizes wider than wheel */
+    max-width: none;
+    height: auto;
+    bottom: -7%;
+    /* Position from bottom of wrapper */
+    left: 45%;
+    transform: translateX(-50%);
+    /* Center horizontally relative to wrapper */
+    z-index: 2;
+}
+
+
+/* Right Column */
+.right-column {
+    flex: 1;
+    color: white;
+    justify-content: center;
+    padding-right: 5%;
+    padding-left: 2%;
+    overflow: hidden;
+}
+
+.racing-text-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 100%;
+    margin-top: -30%;
+    /* Move text up as requested */
+}
+
+.main-title {
+    display: flex;
+    flex-direction: column;
+    line-height: 0.9;
+    margin-bottom: 1.5vw;
+}
+
+.title-top {
+    font-size: clamp(4rem, 10vw, 12rem);
+    /* Slightly adjusted max size */
+    font-weight: normal;
+    /* Font file handles bold/weight */
+    color: #FF6C08;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    font-family: 'EthnocentricRg-Bold', sans-serif;
+    /* Updated font family */
+    transform: none;
+    /* Removed scale as the font is likely already extended/bold */
+    white-space: nowrap;
+}
+
+.title-bottom {
+    font-size: clamp(1rem, 2.8vw, 3.5rem);
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-family: 'EthnocentricRg-Bold', sans-serif;
+    /* Align with top title */
+    white-space: nowrap;
+}
+
+.promo-info {
+    margin-bottom: 2vw;
+}
+
+.promo-lead {
+    font-size: clamp(1rem, 2vw, 2rem);
+    font-weight: 500;
+    /* Medium weight */
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: -10px;
+    /* Elimina espacio abajo */
+}
+
+.highlight {
+    color: #FE6E07;
+    font-weight: 700;
+}
+
+.promo-sub {
+    font-size: 1.5rem;
+    color: var(--color-text-muted);
+    font-family: 'Segoe UI', sans-serif;
+    margin-top: 15px;
+}
+
+/* CTA Button Parallelogram */
+.cta-btn-parallelogram {
+    background: linear-gradient(90deg, #FE6E07, #F6C100);
+    border: none;
+    width: 26vw;
+    /* Specific width from design */
+    height: 5.2vw;
+    /* Specific height from design */
+    padding: 0;
+    /* Remove padding as we have fixed dimensions */
+    transform: skewX(-20deg);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Center content */
+    gap: 15px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    max-width: 80%;
+    /* Keep responsive constraint */
+    margin-left: 20px;
+}
+
+.cta-btn-parallelogram:hover {
+    transform: skewX(-20deg) translateY(-2px);
+    box-shadow: 0 15px 30px rgba(255, 153, 0, 0.4);
+}
+
+.btn-text {
+    transform: skewX(20deg);
+    color: white;
+    font-weight: 900;
+    /* Extra bold for Black */
+    font-stretch: condensed;
+    /* Attempt to condense if supported */
+    font-size: clamp(1rem, 2vw, 1rem);
+    text-transform: uppercase;
+    white-space: nowrap;
+    font-family: 'HelveticaNeue-CondensedBlack', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.btn-arrow {
+    transform: skewX(20deg);
+    /* Counter-skew only, NO rotation */
+    color: white;
+    /* Ensure white color */
+    font-size: 1.5rem;
+    font-weight: 900;
+    /* Bold */
+    margin-left: 10px;
+    display: flex;
+    /* Centering */
+    align-items: center;
+    border: none;
+    /* REMOVE BORDERS from previous attempt */
+    width: auto;
+    /* Reset width */
+    height: auto;
+    /* Reset height */
+    line-height: 1;
+}
+
+
+
+/* Responsive Adjustments for Laptops/Tablets */
+@media (max-width: 1366px) {
+    .cta-btn-parallelogram {
+        width: 350px !important;
+        height: 80px !important;
+    }
+
+    .btn-text {
+        font-size: 1rem;
+        /* Adjust text size slightly */
+    }
+}
+
+/* Specific Mobile Adjustments */
+@media (max-width: 1024px) {
+    /* Nav rules removed to avoid conflict with top hamburger menu logic */
+
+    .hero-left-bg {
+        clip-path: polygon(0 0, 70% 0, 50% 100%, 0 100%);
+        width: 60%;
+    }
+
+    .hero-wheel {
+        width: 60vh;
+        left: -50px;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .hero-section {
+        height: auto;
+        flex-direction: column;
+        display: block;
+        min-height: auto;
+    }
+
+    .hero-left-bg {
+        width: 100%;
+        height: 500px;
+        clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    }
+
+    /* Nav header styles removed to rely on global mobile/tablet logic */
+
+    .hero-container {
+        flex-direction: column;
+        padding-top: 20px;
+    }
+
+    .hero-column {
+        height: auto;
+        width: 100%;
+    }
+
+    .left-column {
+        height: 400px;
+        width: 100%;
+    }
+
+    .brand-logo {
+        left: 20px;
+        width: 150px;
+    }
+
+    .hero-wheel {
+        /* Reset specific wheel styles if overwritten */
+    }
+
+    .visual-group-wrapper {
+        width: 60%;
+        /* Smaller on mobile */
+        max-width: 300px;
+    }
+
+    .hero-prizes {
+        display: none;
+        /* Keep hidden on mobile as per previous Design */
+    }
+
+    .right-column {
+        padding: 40px 20px;
+        text-align: center;
+        align-items: center;
+    }
+
+    .racing-text-content {
+        align-items: center;
+        margin-left: 0;
+    }
+
+    .main-title {
+        align-items: center;
+    }
+
+
+    .title-top {
+        transform: none;
+    }
+
+    .promo-sub {
+        font-size: 1rem;
+        /* Reduce font size on mobile to prevent overflow */
+    }
+
+    .cta-btn-parallelogram {
+        /* transform: none;  REMOVED to keep skew */
+        /* border-radius: 4px; REMOVED to keep shape */
+        margin-left: 0;
+        width: 100%;
+        /* Still allow full width */
+        justify-content: center;
+        /* Keep original padding/dimensions if viable, or let them scale */
+    }
+
+    /* Remove text un-skew reset so it stays aligned with button skew */
+    /* If button is skewed, text usually needs counter-skew. 
+       The original CSS had counter-skew. 
+       If we removed 'transform: none' on button, it stays skewed -20deg.
+       The text had 'transform: skewX(20deg)'. 
+       So we should NOT reset text transform either. 
+    */
+}
+
+/* --- SECTION 2: PRODUCT CAROUSEL --- */
+.carousel-section {
+    position: relative;
+    z-index: 20500;
+    /* Higher than nav to be safe, or just below if nav is 99999 */
+    /* Nav is 99999, CTA is 9999. Let's make this 20000 to cover curtains but be under nav */
+    z-index: 50;
+    background-color: #f0f0f0;
+    padding: 10vw 0;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 100%;
+    /* Slanted Top effect: Starts lower on left, goes high on right */
+    clip-path: polygon(0 6vw, 100% 0, 100% 100%, 0 100%);
+    /* Ensure it has a distinct background/dimension */
+}
+
+.carousel-track {
+    display: flex;
+    gap: 30px;
+    width: max-content;
+    animation: scroll 20s linear infinite;
+    padding: 20px 0;
+}
+
+.carousel-track:hover {
+    animation-play-state: paused;
+}
+
+.product-card {
+    position: relative;
+    width: 25vw;
+    height: 350px;
+    background: white;
+    transform: skewX(-10deg);
+    border-radius: 5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 20px;
+    flex-shrink: 0;
+    /* Prevent shrinking */
+}
+
+/* Gray box for text */
+.product-info-box {
+    background-color: #333;
+    width: 100%;
+    padding: 10px 0;
+    margin-top: 10px;
+    z-index: 2;
+    /* Ensure it stays on top of the image */
+    position: relative;
+    /* Inherits -10deg skew from .product-card automatically.
+       Because it is a block element inside a skewed parent.
+       No extra transform needed to make it a parallelogram. */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-card img.product-img {
+    width: 85%;
+    height: auto;
+    object-fit: contain;
+    transform: skewX(10deg);
+    margin-bottom: -4vw;
+    /* Increased overlap to tuck behind box */
+    margin-top: auto;
+    margin-left: 2vw;
+    position: relative;
+    z-index: 1;
+    /* Lower than info box */
+}
+
+.p-title {
+    font-family: 'HelveticaNeue-CondensedBlack', sans-serif;
+    color: white;
+    /* Changed from #444 */
+    font-size: 1.5rem;
+    font-weight: bold;
+    /* Explicitly bold */
+    text-transform: uppercase;
+    margin: 0;
+    transform: skewX(10deg);
+    /* Counter-skew to be straight */
+    text-align: center;
+    line-height: 1.1;
+}
+
+.p-subtitle {
+    font-family: 'HelveticaNeue-CondensedBlack', sans-serif;
+    color: #FE6E07;
+    font-size: 1.5rem;
+    font-weight: bold;
+    /* Explicitly bold to match title */
+    text-transform: uppercase;
+    margin: 0;
+    transform: skewX(10deg);
+    /* Counter-skew to be straight */
+    text-align: center;
+    line-height: 1.1;
+}
+
+/* Loop Animation 
+   We have 3 unique items. Repeats A,B,C, A,B,C...
+   30px gap. 250px width.
+   Total width of one set = (250+30)*3 = 840px.
+   Move left by 840px to loop.
+*/
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-840px);
+    }
+}
+
+/* Mobile Adjustments */
+
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .product-card {
+        width: 180px;
+        height: 280px;
+    }
+
+    .p-title {
+        font-size: 1.2rem;
+    }
+
+    @keyframes scroll {
+        100% {
+            transform: translateX(-630px);
+            /* (180+30)*3 = 210*3 = 630 */
+        }
+    }
+}
+
+/* --- TERMS MODAL --- */
+/* --- TERMS MODAL --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 40px;
+    border: 1px solid #888;
+    width: 100%;
+    max-width: 800px;
+    height: 65vh;
+    border-radius: 0;
+    /* No radius */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    /* Rhomboid Effect */
+    transform: skewX(-10deg);
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Counter-skew content */
+.modal-content>* {
+    transform: skewX(10deg);
+}
+
+.modal-body {
+    overflow-y: auto;
+    flex-grow: 1;
+    padding-right: 10px;
+}
+
+/* Scrollbar Styling for Modal */
+.modal-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 0;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background: #FE6E07;
+    border-radius: 0;
+}
+
+.close-modal {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 35px;
+    /* Adjusted spacing */
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+    color: #FE6E07;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Content Typography */
+.terms-content h2 {
+    font-family: 'HelveticaNeue-CondensedBlack', sans-serif;
+    color: #FE6E07;
+    text-transform: uppercase;
+    margin-top: 0;
+}
+
+.terms-content h3 {
+    font-family: 'HelveticaNeue-CondensedBlack', sans-serif;
+    color: #333;
+    margin-top: 20px;
+}
+
+.terms-content p {
+    font-family: 'Outfit', sans-serif;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* --- FAQ ACCORDION --- */
+.faq-main-title {
+    font-family: 'HelveticaNeue-CondensedBlack', sans-serif;
+    color: #FE6E07;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+}
+
+.faq-item {
+    border-bottom: 2px solid black;
+    margin-bottom: 15px;
+}
+
+.faq-question {
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    cursor: pointer;
+    font-family: 'HelveticaNeue-CondensedBlack', sans-serif;
+    font-size: 1.2rem;
+    color: black;
+    transition: color 0.3s;
+}
+
+/* --- UPDATED TYPOGRAPHY USAGE --- */
+.step-title,
+.faq-main-title,
+.faq-question {
+    font-family: var(--font-display);
+}
+
+.step-desc,
+.terms-content p,
+.faq-answer p {
+    font-family: var(--font-primary);
+}
+
+.gp-branding {
+    font-family: var(--font-brand);
+}
+
+.faq-question:hover {
+    color: #FE6E07;
+}
+
+.faq-icon {
+    font-size: 1.8rem;
+    color: #FE6E07;
+    font-weight: bold;
+    transition: transform 0.3s;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+}
+
+.faq-answer p {
+    font-family: 'Outfit', sans-serif;
+    color: #444;
+    line-height: 1.5;
+    margin: 10px 0 20px 0;
+}
+
+/* Active State for FAQ */
+.faq-item.active .faq-answer {
+    max-height: 200px;
+    /* Expands */
+}
+
+.faq-item.active .faq-icon {
+    transform: rotate(45deg);
+    /* Turns + to x */
+}
+
+/* --- TRANSITION VIDEO OVERLAY --- */
+#transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 200000;
+    /* Highest priority */
+    display: none;
+    /* Hidden by default */
+    align-items: center;
+    justify-content: center;
+}
+
+#transition-video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* Ensures full video is seen (letterboxed if needed) */
+    pointer-events: none;
+    /* Prevents user from clicking pause/play manually */
+}
