@@ -16,22 +16,24 @@
 
 <body class="bg-white">
     <!-- HEADER / NAVIGATION -->
-    <header class="bg-black fixed w-full top-0 z-50">
+    <header class="fixed w-full top-0 z-50 transition-colors duration-300 bg-transparent hover:bg-black group">
         <nav class="container mx-auto py-4 px-6 flex justify-between items-center">
             <div class="flex items-center">
-                <img src="/assets/Logos Maroma/Logo_Maroma_Blanco+Isologo_color.png" alt="Maroma" class="h-10">
+                <img src="/assets/Logos Maroma/Logo_Maroma_Blanco+Isologo_color.png" alt="Maroma" class="h-10" oncontextmenu="return false;" draggable="false">
             </div>
 
-            <ul class="hidden md:flex space-x-8 text-white text-sm">
-                <li><a href="#inicio" class="hover:text-red-500 transition">Inicio</a></li>
-                <li><a href="#servicios" class="hover:text-red-500 transition">Servicios</a></li>
-                <li><a href="#partners" class="hover:text-red-500 transition">Partners</a></li>
-                <li><a href="#casos-de-exito" class="hover:text-red-500 transition">Casos de éxito</a></li>
-            </ul>
+            <div class="hidden md:flex items-center gap-8">
+                <ul class="flex space-x-8 text-white text-sm">
+                    <li><a href="#inicio" class="hover:text-red-500 transition">Inicio</a></li>
+                    <li><a href="#servicios" class="hover:text-red-500 transition">Servicios</a></li>
+                    <li><a href="#partners" class="hover:text-red-500 transition">Partners</a></li>
+                    <li><a href="#casos-de-exito" class="hover:text-red-500 transition">Casos de éxito</a></li>
+                </ul>
 
-            <button onclick="openAgendarModal()" class="bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700 transition text-sm font-semibold">
-                Agendar Meet
-            </button>
+                <button onclick="openAgendarModal()" class="bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700 transition text-sm font-semibold">
+                    Agendar Meet
+                </button>
+            </div>
         </nav>
     </header>
 
@@ -41,7 +43,7 @@
         <div class="absolute inset-0 flex">
             <!-- Mitad izquierda - Imagen del luchador -->
             <div class="w-1/2 h-full relative">
-                <img src="/assets/Logos Maroma/luchador-cerca-retrato-antes-de-la-pelea.jpg" alt="Luchador" class=" h-full object-cover object-center opacity-90">
+                <img src="/assets/Logos Maroma/luchador-cerca-retrato-antes-de-la-pelea.jpg" alt="Luchador" class="h-full object-cover object-center opacity-90" oncontextmenu="return false;" draggable="false">
                 <div class="absolute inset-0 bg-gradient-to-r from-transparent to-black"></div>
             </div>
             <!-- Mitad derecha - Fondo negro -->
@@ -60,22 +62,16 @@
 
     </section>
 
-    <section class="bg-gray-700 py-60 relative overflow-hidden">
+    <section class="bg-gray-700 py-80 relative overflow-hidden">
         <div class="absolute inset-0">
-            <video autoplay muted loop playsinline class="w-full h-full object-cover">
+            <video autoplay muted loop playsinline class="w-full h-full object-cover" oncontextmenu="return false;">
                 <source src="/assets/videos/Intro Nueva Press Maroma.mp4" type="video/mp4">
             </video>
+            <!-- Overlay transparente para proteger el video -->
+            <div class="absolute inset-0 z-10" oncontextmenu="return false;" ondragstart="return false;"></div>
         </div>
 
-        <div class="container mx-auto px-6 text-center relative z-10">
-            <div class="cursor-pointer inline-block" onclick="openVideoModal()">
-                <div class="w-32 h-32 md:w-40 md:h-40 bg-white rounded-full flex items-center justify-center playbutton shadow-2xl mx-auto">
-                    <svg class="w-12 h-12 md:w-16 md:h-16 text-gray-800 ml-2" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M8 5v14l11-7z" />
-                    </svg>
-                </div>
-            </div>
-        </div>
+
     </section>
 
     <section id="servicios" class="bg-red-600 py-16 relative torn-paper-top torn-red-top">
@@ -114,7 +110,7 @@
     <section class="py-20 relative">
         <!-- Imagen de fondo -->
         <div class="absolute inset-0">
-            <img src="/assets/Logos Maroma/AdobeStock_303132792.jpeg" alt="Fondo" class="w-full h-full object-cover">
+            <img src="/assets/Logos Maroma/AdobeStock_303132792.jpeg" alt="Fondo" class="w-full h-full object-cover" oncontextmenu="return false;" draggable="false">
             <div class="absolute inset-0 bg-white/30"></div>
         </div>
 
@@ -157,7 +153,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <!-- Mapa de México -->
                 <div class="flex justify-center">
-                    <img src="/assets/img/mapa-mexico.png" alt="Mapa México" class="max-w-xs md:max-w-md w-full opacity-80">
+                    <img src="/assets/img/mapa-mexico.png" alt="Mapa México" class="max-w-xs md:max-w-md w-full opacity-80" oncontextmenu="return false;" draggable="false">
                 </div>
                 <!-- Información de oficinas -->
                 <div class="text-center md:text-left">
@@ -174,7 +170,7 @@
     <section id="partners" class="relative py-20">
         <!-- Imagen de fondo -->
         <div class="absolute inset-0">
-            <img src="/assets/Logos Maroma/AdobeStock_303132792.jpeg" alt="Fondo" class="w-full h-full object-cover">
+            <img src="/assets/Logos Maroma/AdobeStock_303132792.jpeg" alt="Fondo" class="w-full h-full object-cover" oncontextmenu="return false;" draggable="false">
             <div class="absolute inset-0 bg-white/30"></div>
         </div>
         
@@ -182,37 +178,37 @@
             <h2 class="text-center text-4xl md:text-5xl font-bold text-gray-900 mb-16">NUESTROS CLIENTES</h2>
             <div class="grid grid-cols-3 md:grid-cols-5 gap-8 md:gap-12 items-center max-w-5xl mx-auto">
                 <div class="flex justify-center">
-                    <img src="/assets/img/clientes/Logo Energizer Negro.png" alt="Energizer" class="client-logo h-10 md:h-12 object-contain">
+                    <img src="/assets/img/clientes/Logo Energizer Negro.png" alt="Energizer" class="client-logo h-10 md:h-12 object-contain" oncontextmenu="return false;" draggable="false">
                 </div>
                 <div class="flex justify-center">
-                    <img src="/assets/img/clientes/Logo Cinsa.png" alt="Cinsa" class="client-logo h-10 md:h-12 object-contain">
+                    <img src="/assets/img/clientes/Logo Cinsa.png" alt="Cinsa" class="client-logo h-10 md:h-12 object-contain" oncontextmenu="return false;" draggable="false">
                 </div>
                 <div class="flex justify-center">
-                    <img src="/assets/img/clientes/Logo Toyota.png" alt="Toyota" class="client-logo h-10 md:h-12 object-contain">
+                    <img src="/assets/img/clientes/Logo Toyota.png" alt="Toyota" class="client-logo h-10 md:h-12 object-contain" oncontextmenu="return false;" draggable="false">
                 </div>
                 <div class="flex justify-center">
-                    <img src="/assets/img/clientes/Logo Santa Anita.png" alt="Santa Anita" class="client-logo h-10 md:h-12 object-contain">
+                    <img src="/assets/img/clientes/Logo Santa Anita.png" alt="Santa Anita" class="client-logo h-10 md:h-12 object-contain" oncontextmenu="return false;" draggable="false">
                 </div>
                 <div class="flex justify-center">
-                    <img src="/assets/img/clientes/Logo Libanius.png" alt="Libanius" class="client-logo h-10 md:h-12 object-contain">
+                    <img src="/assets/img/clientes/Logo Libanius.png" alt="Libanius" class="client-logo h-10 md:h-12 object-contain" oncontextmenu="return false;" draggable="false">
                 </div>
                 <div class="flex justify-center">
-                    <img src="/assets/img/clientes/Logo Haagen Dazs.png" alt="Häagen-Dazs" class="client-logo h-10 md:h-12 object-contain">
+                    <img src="/assets/img/clientes/Logo Haagen Dazs.png" alt="Häagen-Dazs" class="client-logo h-10 md:h-12 object-contain" oncontextmenu="return false;" draggable="false">
                 </div>
                 <div class="flex justify-center">
-                    <img src="/assets/img/clientes/Logo Helados Nestlé.png" alt="Nestlé" class="client-logo h-10 md:h-12 object-contain">
+                    <img src="/assets/img/clientes/Logo Helados Nestlé.png" alt="Nestlé" class="client-logo h-10 md:h-12 object-contain" oncontextmenu="return false;" draggable="false">
                 </div>
                 <div class="flex justify-center">
-                    <img src="/assets/img/clientes/Logo Grupo Herdez.png" alt="Herdez" class="client-logo h-10 md:h-12 object-contain">
+                    <img src="/assets/img/clientes/Logo Grupo Herdez.png" alt="Herdez" class="client-logo h-10 md:h-12 object-contain" oncontextmenu="return false;" draggable="false">
                 </div>
                 <div class="flex justify-center">
-                    <img src="/assets/img/clientes/Logo Calorex.png" alt="Calorex" class="client-logo h-10 md:h-12 object-contain">
+                    <img src="/assets/img/clientes/Logo Calorex.png" alt="Calorex" class="client-logo h-10 md:h-12 object-contain" oncontextmenu="return false;" draggable="false">
                 </div>
                 <div class="flex justify-center">
-                    <img src="/assets/img/clientes/Logo Daltile.png" alt="Daltile" class="client-logo h-10 md:h-12 object-contain">
+                    <img src="/assets/img/clientes/Logo Daltile.png" alt="Daltile" class="client-logo h-10 md:h-12 object-contain" oncontextmenu="return false;" draggable="false">
                 </div>
                 <div class="flex justify-center col-span-3 md:col-span-5">
-                    <img src="/assets/img/clientes/Logo Vitromex.png" alt="Vitromex" class="client-logo h-10 md:h-12 object-contain">
+                    <img src="/assets/img/clientes/Logo Vitromex.png" alt="Vitromex" class="client-logo h-10 md:h-12 object-contain" oncontextmenu="return false;" draggable="false">
                 </div>
             </div>
         </div>
@@ -221,7 +217,7 @@
     <!-- FOOTER -->
     <footer class="bg-black py-12">
         <div class="container mx-auto px-6 text-center">
-            <img src="/assets/Logos Maroma/Logo_Maroma_Color.png" alt="Maroma" class="h-16 md:h-20 mx-auto mb-4">
+            <img src="/assets/Logos Maroma/Logo_Maroma_Color.png" alt="Maroma" class="h-16 md:h-20 mx-auto mb-4" oncontextmenu="return false;" draggable="false">
             <p class="text-red-600 text-sm italic-text">Inconformistas</p>
         </div>
     </footer>
